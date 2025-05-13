@@ -1,1 +1,1 @@
-# RickAndMorti
+# RickAndMorty
