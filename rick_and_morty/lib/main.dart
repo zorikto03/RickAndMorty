@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:rick_and_morty/presentation/favorite_tab.dart';
+import 'package:rick_and_morty/presentation/home_tab.dart';
+
+void main() {
+  runApp(TabPanel());
+}
+
+class TabPanel extends StatelessWidget{
+  const TabPanel({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DefaultTabController(
+        length: 3, 
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Title tab panel"),
+          ),
+          bottomNavigationBar: TabBar(tabs: [
+            Tab(icon: Icon(Icons.home_outlined),),
+            Tab(icon: Icon(Icons.favorite_outlined),),
+            Tab(icon: Icon(Icons.settings_outlined),)
+          ]),
+          body: TabBarView(children: [
+            HomeTab(),
+            FavoriteTab(),
+            Icon(Icons.settings)
+          ]),
+        ) 
+      ) 
+    );
+  }
+
+}
