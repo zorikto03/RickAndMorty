@@ -64,7 +64,11 @@ class CharacterRepositoryImp extends CharacterRepository{
   update(Character character) async {
     final db = await DbProvider.db.database;
 
-    await db.update(tableName, character.toMap());
+    await db.update(
+      tableName, 
+      character.toMap(),
+      where: "id = ?",
+      whereArgs: [character.id]);
   }
     
 }

@@ -23,12 +23,6 @@ class Character{
     // required this.location
   });
 
-  void setFavoriteStatus(){
-    isFavorite = !isFavorite;
-  }
-
-  Icon getIconByStatus() => isFavorite ? Icon(Icons.star) : Icon(Icons.star_outlined);
-
   Map<String, dynamic> toMap(){
     return {
       "id": id, 

@@ -23,18 +23,24 @@ class CharacterState {
   async {
     isLoading = true;
 
-    var character = await _characterService.getByIdAsync(id);
-
-    if (character != null)
-    {
-      var charContains = await _characterRepository.contains(character); 
-
-      if (!charContains){
-        await _characterRepository.add(character);
-      }
+    var character = await _characterRepository.getByIdAsync(id);
+    
+    if (character != null){
+      isLoading = false;
+      return character;
     }
-    else{
-      character = await _characterRepository.getByIdAsync(id);
+    
+    character = await _characterService.getByIdAsync(id);
+
+    if (character == null){
+      isLoading = false;
+      return null;
+    }
+
+    var charContains = await _characterRepository.contains(character); 
+
+    if (!charContains){
+      await _characterRepository.add(character);
     }
 
     isLoading = false;
@@ -46,23 +52,35 @@ class CharacterState {
   async {
     isLoading = true;
 
-    var charactersList = await _characterService.getRangeAsync(characterIds);
+    var charactersList = await _characterRepository.getMultiple(characterIds);
     
     if (charactersList != null){
-      for (var character in charactersList) {
-        var charContains = await _characterRepository.contains(character); 
-
-        if (!charContains){
-          await _characterRepository.add(character);
-        }
-      }
+      isLoading = false;
+      return charactersList;
     }
-    else{
-      charactersList = await _characterRepository.getMultiple(characterIds);
+
+    charactersList = await _characterService.getRangeAsync(characterIds);
+
+    if (charactersList == null){
+      isLoading = false;
+      return [];
+    }  
+
+    for (var character in charactersList) {
+      var charContains = await _characterRepository.contains(character); 
+
+      if (!charContains){
+        await _characterRepository.add(character);
+      }
     }
 
     isLoading = false;
 
     return charactersList;
+  }
+
+  Future<void> updateAsync(Character character) 
+  async {
+    await _characterRepository.update(character);
   }
 }

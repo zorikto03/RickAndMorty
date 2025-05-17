@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/infrastructure/persistence/database/db_provider.dart';
 import 'package:rick_and_morty/presentation/favorite_tab.dart';
 import 'package:rick_and_morty/presentation/home_tab.dart';
+import 'package:rick_and_morty/presentation/models/characters_data_model.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,7 +11,9 @@ void main() {
 }
 
 class TabPanel extends StatelessWidget{
-  const TabPanel({super.key});
+  TabPanel({super.key});
+  
+  final CharactersDataModel _model = CharactersDataModel();
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +31,8 @@ class TabPanel extends StatelessWidget{
             Tab(icon: Icon(Icons.settings_outlined),)
           ]),
           body: TabBarView(children: [
-            HomeTab(),
-            FavoriteTab(),
+            HomeTab(dataModel: _model),
+            FavoriteTab(dataModel: _model),
             Icon(Icons.settings)
           ]),
         ) 
