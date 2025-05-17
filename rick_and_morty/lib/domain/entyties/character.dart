@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Character{
   int id;
   String name;
@@ -8,6 +10,8 @@ class Character{
   // Origin origin;
   // Location location;
 
+  bool isFavorite = false;
+  
   Character({
     required this.id, 
     required this.name,
@@ -19,6 +23,35 @@ class Character{
     // required this.location
   });
 
+  void setFavoriteStatus(){
+    isFavorite = !isFavorite;
+  }
+
+  Icon getIconByStatus() => isFavorite ? Icon(Icons.star) : Icon(Icons.star_outlined);
+
+  Map<String, dynamic> toMap(){
+    return {
+      "id": id, 
+      "name": name, 
+      "status" : status,
+      "species" : species,
+      "gender" : gender,
+      "image" : image,
+      "isFavorite" : isFavorite
+    };
+  }
+
+  Character.fromMap(Map<String, dynamic> map) :
+    id = map["id"],
+    name = map["name"],
+    status = map["status"],
+    species = map["species"],
+    gender = map["gender"],
+    image = map["image"],
+    isFavorite = map["isFavorite"] == 1;
+
+  @override
+  String toString() => "id: $id, name: $name, status: $status, species: $species";
 }
 
 

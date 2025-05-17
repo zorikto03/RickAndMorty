@@ -24,8 +24,14 @@ class CharacterState {
     isLoading = true;
 
     var character = await _characterService.getByIdAsync(id);
-    if (character != null){
-      _characterRepository.Add(character);
+
+    if (character != null)
+    {
+      var charContains = await _characterRepository.contains(character); 
+
+      if (!charContains){
+        await _characterRepository.add(character);
+      }
     }
     else{
       character = await _characterRepository.getByIdAsync(id);
@@ -40,16 +46,23 @@ class CharacterState {
   async {
     isLoading = true;
 
-    var character = await _characterService.getRangeAsync(characterIds);
-    if (character != null){
-      _characterRepository.AddRange(character);
+    var charactersList = await _characterService.getRangeAsync(characterIds);
+    
+    if (charactersList != null){
+      for (var character in charactersList) {
+        var charContains = await _characterRepository.contains(character); 
+
+        if (!charContains){
+          await _characterRepository.add(character);
+        }
+      }
     }
     else{
-      character = await _characterRepository.getMultiple(characterIds);
+      charactersList = await _characterRepository.getMultiple(characterIds);
     }
 
     isLoading = false;
 
-    return character;
+    return charactersList;
   }
 }

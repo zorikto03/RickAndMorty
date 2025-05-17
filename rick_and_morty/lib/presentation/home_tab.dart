@@ -64,7 +64,7 @@ class _HomeTabState extends State<HomeTab> {
               itemBuilder: (context, index)
               {
                 if (index < _dataModel.data.length){
-                  return createCard(_dataModel.data[index]);
+                  return CharacterCard(character: _dataModel.data[index]);
                 }
                 else {
                   return const Center(
@@ -78,7 +78,16 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  Widget createCard(Character character){
+}
+
+class CharacterCard extends StatelessWidget{
+  
+  final Character character;
+
+  const CharacterCard({super.key, required this.character});
+
+  @override
+  Widget build(BuildContext context) {
     
     return Card(
 
@@ -92,7 +101,6 @@ class _HomeTabState extends State<HomeTab> {
         },
 
         child: ListTile(
-          
           leading: CircleAvatar(
             radius: 40,
             backgroundImage: NetworkImage(character.image),
@@ -115,7 +123,14 @@ class _HomeTabState extends State<HomeTab> {
             ),
           ),
 
-          trailing: Icon(Icons.favorite_outlined),
+          trailing: IconButton(
+            icon: character.getIconByStatus(),
+            onPressed: (){
+              character.setFavoriteStatus();
+              final status = character.isFavorite;
+              print("ontap trailing $status");
+            },
+          ) 
         )
       ),
     );

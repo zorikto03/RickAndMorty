@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty/infrastructure/persistence/database/db_provider.dart';
 import 'package:rick_and_morty/presentation/favorite_tab.dart';
 import 'package:rick_and_morty/presentation/home_tab.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  DbProvider.db.initDb();
   runApp(TabPanel());
 }
 
