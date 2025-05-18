@@ -1,16 +1,13 @@
 # rick_and_morty
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Проект написан с использование Clean Architecture, Domain driven design.
+работа с каждой сущностью произодится в отдельном файле.
+структура проекта:
+ 1) application - слой бизнес логики, в котором осуществляется обращение с сервисам слоя инфраструктуры: база данных, api. 
+ 2) domain - слой домена, в котором находятся сущности бищнес логики и интерфейсы.
+   - entyties - сущности
+   - repositories - абстрактные классы репозиторев.
+ 3) infrastructure - слой инфраструктуры, в котором происходит обращения к источникам данных: база данных, api сервис.
+   - api - сервис обращения к rest сервису
+   - persistence - база данных с реализацией репозиториев.
+ 4) presentation - слой UI. 
