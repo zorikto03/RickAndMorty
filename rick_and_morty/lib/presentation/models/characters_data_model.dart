@@ -24,31 +24,28 @@ class CharactersDataModel extends ChangeNotifier{
     }
   }
 
-  // add characters to favorite list
-  void addToFavoriteList(Character character){
-    favoriteCharacters.add(character);
+  void changeFavoriteStatus(Character character){
+    bool newValue = !character.isFavorite;
+    character.isFavorite = newValue;
+
+    if (newValue){
+      favoriteCharacters.add(character);
+    }
+    else{
+      favoriteCharacters.remove(character);
+    }
+
     characterState.updateAsync(character);
     notifyListeners();
   }
 
-  void deleteFromFavoriteList(Character character){
-    favoriteCharacters.remove(character);
-    characterState.updateAsync(character);
+  void sortFavoriteListByName(){
+    favoriteCharacters.sort((x, y) => x.name.compareTo(y.name));
+    notifyListeners();
+  }
+
+  void sortFavoriteListRandom(){
+    favoriteCharacters.shuffle();
     notifyListeners();
   }
 }
-
-// class CharacterDataProvider extends InheritedNotifier<CharactersDataModel>{
-  
-//   final CharactersDataModel model;
-
-//   const CharacterDataProvider({
-//     super.key, 
-//     required super.child, 
-//     required this.model
-//     }) : super(notifier: model);
-  
-//   static CharactersDataModel? of(BuildContext context){
-//     return context.dependOnInheritedWidgetOfExactType<CharacterDataProvider>()?.model;
-//   }
-// }
