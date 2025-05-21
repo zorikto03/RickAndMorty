@@ -1,18 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/domain/entyties/character.dart';
-import 'package:rick_and_morty/presentation/models/characters_data_model.dart';
 
 class CharacterCard extends StatelessWidget{
 
   final Character character;
-  final CharactersDataModel dataModel;
   final Function() actionFavoriteButton;
 
   const CharacterCard({
     super.key,
     required this.character, 
-    required this.dataModel, 
     required this.actionFavoriteButton});
 
   @override
@@ -57,18 +54,6 @@ class CharacterCard extends StatelessWidget{
             trailing: IconButton(
               icon: character.isFavorite ? Icon(Icons.star) : Icon(Icons.star_border),
               onPressed: actionFavoriteButton
-              // {
-                
-              //   bool newValue = !character.isFavorite;
-              //   character.isFavorite = newValue;
-        
-              //   if (newValue){
-              //     dataModel.addToFavoriteList(character);
-              //   }
-              //   else{
-              //     dataModel.deleteFromFavoriteList(character);
-              //   }
-              // },
             ) 
           )
         ),

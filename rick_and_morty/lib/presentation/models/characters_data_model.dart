@@ -49,3 +49,14 @@ class CharactersDataModel extends ChangeNotifier{
     notifyListeners();
   }
 }
+
+class CharactersDataProvider extends InheritedNotifier<CharactersDataModel>{
+  final CharactersDataModel model;
+
+  const CharactersDataProvider({super.key, required super.child, required this.model}) 
+  : super(notifier: model);
+
+  static CharactersDataModel? of(BuildContext context){
+    return context.dependOnInheritedWidgetOfExactType<CharactersDataProvider>()?.model;
+  }
+}

@@ -4,9 +4,7 @@ import 'package:rick_and_morty/presentation/character_card.dart';
 import 'package:rick_and_morty/presentation/models/characters_data_model.dart';
 
 class FavoriteTab extends StatefulWidget{
-  const FavoriteTab({super.key, required this.dataModel});
-
-  final CharactersDataModel dataModel;
+  const FavoriteTab({super.key});
 
   @override
   State<FavoriteTab> createState() => _FavoriteTabState();
@@ -21,8 +19,8 @@ class _FavoriteTabState extends State<FavoriteTab> {
 
   @override
   Widget build(BuildContext context) {
-    
-    var favoriteList = widget.dataModel.favoriteCharacters;
+    var model = CharactersDataProvider.of(context)!;
+    var favoriteList = model.favoriteCharacters;
 
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +30,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
           IconButton(
             onPressed: (){
               setState(() {
-                widget.dataModel.sortFavoriteListByName();
+                model.sortFavoriteListByName();
               });
             }, 
             icon: Icon(Icons.sort_by_alpha)
@@ -40,7 +38,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
           IconButton(
             onPressed: (){
               setState(() {
-                widget.dataModel.sortFavoriteListRandom();
+                model.sortFavoriteListRandom();
               });
             },
             icon: Icon(Icons.shuffle))
@@ -53,10 +51,9 @@ class _FavoriteTabState extends State<FavoriteTab> {
           itemBuilder: (context, index, animation){
             return CharacterCard(
               character: favoriteList[index], 
-              dataModel: widget.dataModel,
               actionFavoriteButton: (){
-                var character = widget.dataModel.favoriteCharacters[index];
-                widget.dataModel.changeFavoriteStatus(character);
+                var character = model.favoriteCharacters[index];
+                model.changeFavoriteStatus(character);
 
                 _listKey.currentState?.removeItem(index, (context, animation){
                   return SizeTransition(
@@ -66,7 +63,6 @@ class _FavoriteTabState extends State<FavoriteTab> {
                     // )),
                     child: CharacterCard(
                       character: character, 
-                      dataModel: widget.dataModel,
                       actionFavoriteButton: (){},)
                   ); 
                 });
