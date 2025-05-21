@@ -54,14 +54,14 @@ class CharacterState {
 
     var charactersList = await _characterRepository.getMultiple(characterIds);
     
-    if (charactersList != null){
+    if (charactersList != null && charactersList.isNotEmpty){
       isLoading = false;
       return charactersList;
     }
 
     charactersList = await _characterService.getRangeAsync(characterIds);
 
-    if (charactersList == null){
+    if (charactersList == null || charactersList.isEmpty){
       isLoading = false;
       return [];
     }  
