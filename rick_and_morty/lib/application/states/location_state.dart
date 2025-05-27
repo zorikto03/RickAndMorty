@@ -16,13 +16,12 @@ class LocationState {
   Future<Location?> getByCharacterAsync(Character character) 
   async {
     var location = await _locationRepository.getByName(character.locationName);
-    List<Location> result = [];
+    
     if (location == null){
       location = await _locationService.getByUrlAsync(character.locationUrl);
 
       if (location != null){
         await _locationRepository.add(location);
-        result = await _locationRepository.getAll();
       }
     }
     
