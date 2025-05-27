@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/domain/entyties/character.dart';
+import 'package:rick_and_morty/domain/entyties/location.dart';
 import 'package:rick_and_morty/presentation/models/location_data_model.dart';
 
 class CharacterInfo extends StatefulWidget {
@@ -73,34 +74,25 @@ class CharacterInfoView extends StatelessWidget{
                   height: 50,
                   width: double.infinity,
                 ),
-                SizedBox(
-                  child: Column(
-                    spacing: 20,
-                    children: [
-                      CharacterInfoParam(
-                        paramName: 'Full name', 
-                        paramValue: character.name),
-                      CharacterInfoParam(
-                        paramName: 'Gender',
-                        paramValue: character.gender,),
-                      CharacterInfoParam(
-                        paramName: 'Status', 
-                        paramValue: character.status),
-                      CharacterInfoParam(
-                        paramName: 'Species', 
-                        paramValue: character.species),
-                      CharacterInfoParam(
-                        paramName: 'Location', 
-                        paramValue: character.locationName),
-                      CharacterInfoParam(
-                        paramName: 'Location Type', 
-                        paramValue: location?.type ?? 'Empty'),
-                      CharacterInfoParam(
-                        paramName: 'Location dimension', 
-                        paramValue: location?.dimension ?? 'Empty')
-                    ],
-                  ),
-                )
+                Column(
+                  spacing: 20,
+                  children: [
+                    CharacterInfoParam(
+                      paramName: 'Full name', 
+                      paramValue: character.name),
+                    CharacterInfoParam(
+                      paramName: 'Gender',
+                      paramValue: character.gender,),
+                    CharacterInfoParam(
+                      paramName: 'Status', 
+                      paramValue: character.status),
+                    CharacterInfoParam(
+                      paramName: 'Species', 
+                      paramValue: character.species),
+                    LocationParams(
+                      location: location!),
+                  ],
+                ),
               ],
             );
           }else{
@@ -116,6 +108,97 @@ class CharacterInfoView extends StatelessWidget{
 
 }
 
+class LocationParams extends StatelessWidget{
+  final Location location;
+
+  const LocationParams({
+    super.key, 
+    required this.location});
+  
+  @override
+  Widget build(BuildContext context) {
+    
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50),
+      child: Column(
+        spacing: 20,
+        children: [
+          const Text(
+            'Location',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Name:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  location.name,
+                  textDirection: TextDirection.rtl,
+                  style: const TextStyle(
+                    fontSize: 20
+                  ),
+                  softWrap: true,
+                ),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Type:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              Text(
+                location.type,
+                textDirection: TextDirection.rtl,
+                style: const TextStyle(
+                  fontSize: 20
+                ),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Dimension:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  location.dimension,
+                  textDirection: TextDirection.rtl,
+                  style: const TextStyle(
+                    fontSize: 20
+                  ),
+                  softWrap: true
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+}
 
 class CharacterInfoParam extends StatelessWidget{
   final String paramName;

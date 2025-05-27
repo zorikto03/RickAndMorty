@@ -8,8 +8,7 @@ class LocationRepositoryImp extends LocationRepository{
   @override
   add(Location location) async {
     var db = await DbProvider.db.database;
-
-    db.insert(tableName, location.toMap());
+    await db.insert(tableName, location.toMap());
   }
 
   @override
@@ -31,7 +30,7 @@ class LocationRepositoryImp extends LocationRepository{
   getByName(String name) async {
     final db = await DbProvider.db.database;
 
-    var result = await db.query(tableName, where: 'name = "${name.replaceAll("'", "\\'")}"');
+    var result = await db.query(tableName, where: 'name LIKE ?', whereArgs: [name]);
     
     return result.isNotEmpty ? 
       Location.fromMap(result.first) : 
@@ -47,5 +46,16 @@ class LocationRepositoryImp extends LocationRepository{
       location.toMap(),
       where: 'id = ?',
       whereArgs: [location.id]);
+  }
+  
+  @override
+  getAll() async {
+    final db = await DbProvider.db.database;
+
+    var result = await db.query(tableName);
+
+    return result.isNotEmpty ? 
+      result.map((c) => Location.fromMap(c)).toList() :
+      [];    
   }
 }

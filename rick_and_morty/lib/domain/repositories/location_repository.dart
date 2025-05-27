@@ -10,4 +10,6 @@ abstract class LocationRepository {
   deleteById(int id);
 
   update(Location location);
+
+  Future<List<Location>> getAll();
 }

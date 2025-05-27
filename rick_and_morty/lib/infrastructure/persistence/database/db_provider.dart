@@ -5,16 +5,16 @@ class DbProvider{
   DbProvider._();
   static final DbProvider db = DbProvider._();
 
-  //static late Database _database;
+  static late Database _database;
 
-  Future<Database> get database async => await initDb();
+  Future<Database> get database async => _database;
 
-  Future<Database> initDb() async{
+  Future initDb() async{
     var documentDirectory = join(await getDatabasesPath(), 'test_db.db');
 
     await deleteDatabase(documentDirectory);
 
-    return await openDatabase(
+    _database = await openDatabase(
       documentDirectory,
       onCreate: (db, version) async {
         await db.execute(
