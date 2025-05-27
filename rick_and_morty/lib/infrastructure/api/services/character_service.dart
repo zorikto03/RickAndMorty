@@ -11,7 +11,7 @@ class CharacterService {
     var characterDto = await _apiRequests.getByIdAsync(id);
 
     if (characterDto != null){
-      var character = CharacterMapper.Map(characterDto);
+      var character = CharacterMapper.map(characterDto);
       return character;
     }
     
@@ -25,7 +25,7 @@ class CharacterService {
     if (charactersDto != null){
       var list = List.generate(
         charactersDto.length, 
-        (index) => CharacterMapper.Map(charactersDto[index]));
+        (index) => CharacterMapper.map(charactersDto[index]));
       return list;
     }
     return null;

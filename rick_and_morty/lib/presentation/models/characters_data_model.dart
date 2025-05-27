@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/application/states/character_state.dart';
+import 'package:rick_and_morty/application/states/location_state.dart';
 import 'package:rick_and_morty/domain/entyties/character.dart';
 
 class CharactersDataModel extends ChangeNotifier{
@@ -7,6 +8,7 @@ class CharactersDataModel extends ChangeNotifier{
   final List<Character> favoriteCharacters = [];
 
   var characterState = CharacterState();
+  var locationState = LocationState();
   
   // add characters to model
   void addByIndexes(List<int> indexes){

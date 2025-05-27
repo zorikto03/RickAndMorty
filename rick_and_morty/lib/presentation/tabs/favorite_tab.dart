@@ -24,7 +24,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Favorites"),
+        title: const Text('Favorites'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -33,7 +33,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
                 model.sortFavoriteListByName();
               });
             }, 
-            icon: Icon(Icons.sort_by_alpha)
+            icon: const Icon(Icons.sort_by_alpha)
           ),
           IconButton(
             onPressed: (){
@@ -41,7 +41,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
                 model.sortFavoriteListRandom();
               });
             },
-            icon: Icon(Icons.shuffle))
+            icon: const Icon(Icons.shuffle))
         ],
       ),
       body: SafeArea(
@@ -74,53 +74,3 @@ class _FavoriteTabState extends State<FavoriteTab> {
     );
   }
 }
-
-// class FavoriteTab extends StatelessWidget{
-//   const FavoriteTab({super.key, required this.dataModel});
-
-//   final CharactersDataModel dataModel;
-
-//   @override
-//   Widget build(BuildContext context) {
-    
-//     var favoriteList = dataModel.favoriteCharacters;
-
-//     return Scaffold(
-//       appBar: AppBar(
-//         actions: [
-//           IconButton(
-//             onPressed: (){
-//               dataModel.sortFavoriteListByName();
-//             }, 
-//             icon: Icon(Icons.sort_by_alpha)
-//           ),
-//           IconButton(
-//             onPressed: (){
-//               dataModel.sortFavoriteListRandom();
-//             },
-//             icon: Icon(Icons.shuffle))
-//         ],
-//       ),
-//       body: ListenableBuilder(
-//         listenable: dataModel, 
-//         builder: (context, child){
-          
-//           if (favoriteList.isEmpty){
-//             return Center(
-//               child: Text("Empty"),
-//             );
-//           }
-
-//           return ListView.builder(
-//             itemCount: favoriteList.length, 
-            
-//             itemBuilder: (context, index) {
-//               return CharacterCard(
-//                 character: favoriteList[index], 
-//                 dataModel: dataModel);
-//             } 
-//           );
-//         }) 
-//     );
-//   }
-// }

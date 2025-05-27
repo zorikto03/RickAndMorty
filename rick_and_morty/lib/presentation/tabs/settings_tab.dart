@@ -9,7 +9,7 @@ class SettingsTab extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: const Text('Settings'),
         centerTitle: true,
       ),
       body: ValueListenableBuilder(
@@ -17,10 +17,10 @@ class SettingsTab extends StatelessWidget{
         builder: (context, mode, child){
           return Column(
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(
-                  "Смена темы", 
+                  'Смена темы', 
                   style: TextStyle(
                     fontSize: 20,
                     fontStyle: FontStyle.normal))),
@@ -28,7 +28,7 @@ class SettingsTab extends StatelessWidget{
                 onPressed: (){
                   themeMode.value = mode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
                 }, 
-                icon: mode == ThemeMode.light ? Icon(Icons.dark_mode) : Icon(Icons.light_mode))
+                icon: mode == ThemeMode.light ? const Icon(Icons.dark_mode) : const Icon(Icons.light_mode))
             ],
           );
         }

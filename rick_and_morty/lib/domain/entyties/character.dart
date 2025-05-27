@@ -5,8 +5,10 @@ class Character{
   String species;
   String gender;
   String image;
-  // Origin origin;
-  // Location location;
+  String originName;
+  String originUrl;
+  String locationName;
+  String locationUrl;
 
   bool isFavorite = false;
   
@@ -17,52 +19,41 @@ class Character{
     required this.species,
     required this.gender,
     required this.image,
-    // required this.origin,
-    // required this.location
+    required this.originName,
+    required this.originUrl,
+    required this.locationName,
+    required this.locationUrl
   });
 
   Map<String, dynamic> toMap(){
     return {
-      "id": id, 
-      "name": name, 
-      "status" : status,
-      "species" : species,
-      "gender" : gender,
-      "image" : image,
-      "isFavorite" : isFavorite
+      'id': id, 
+      'name': name, 
+      'status' : status,
+      'species' : species,
+      'gender' : gender,
+      'image' : image,
+      'isFavorite' : isFavorite,
+      'locationName' : locationName,
+      'locationUrl' : locationUrl,
+      'originName' : originName,
+      'originUrl' : originUrl
     };
   }
 
   Character.fromMap(Map<String, dynamic> map) :
-    id = map["id"],
-    name = map["name"],
-    status = map["status"],
-    species = map["species"],
-    gender = map["gender"],
-    image = map["image"],
-    isFavorite = map["isFavorite"] == 1;
+    id = map['id'],
+    name = map['name'],
+    status = map['status'],
+    species = map['species'],
+    gender = map['gender'],
+    image = map['image'],
+    isFavorite = map['isFavorite'] == 1,
+    locationName = map['location']['name'],
+    locationUrl = map['location']['url'],
+    originName = map['origin']['name'],
+    originUrl = map['origin']['url'];
 
   @override
-  String toString() => "id: $id, name: $name, status: $status, species: $species";
-}
-
-
-class Origin{
-  String name;
-  String url;
-
-  Origin({
-    required this.name,
-    required this.url
-  });
-}
-
-class Location{
-  String name;
-  String url;
-
-  Location({
-    required this.name,
-    required this.url
-  });
+  String toString() => 'id: $id, name: $name, status: $status, species: $species';
 }

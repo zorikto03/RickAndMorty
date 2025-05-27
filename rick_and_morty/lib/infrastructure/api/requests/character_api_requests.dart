@@ -7,7 +7,7 @@ class CharacterApiRequests {
   Future<CharacterDto?> getByIdAsync(int id) 
   async 
   {
-    final url = Uri.parse("https://rickandmortyapi.com/api/character/$id");
+    final url = Uri.parse('https://rickandmortyapi.com/api/character/$id');
     
     try {
       final response = await http.get(url);
@@ -30,7 +30,7 @@ class CharacterApiRequests {
   Future<List<CharacterDto>?> getMultipleAsync(List<int> characterIds)
   async
   {
-    final url = Uri.parse("https://rickandmortyapi.com/api/character/$characterIds");
+    final url = Uri.parse('https://rickandmortyapi.com/api/character/$characterIds');
     
     try {
       final response = await http.get(url);

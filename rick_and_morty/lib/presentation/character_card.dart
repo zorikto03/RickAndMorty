@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/domain/entyties/character.dart';
+import 'package:rick_and_morty/presentation/character_info.dart';
 
 class CharacterCard extends StatelessWidget{
 
@@ -21,11 +22,15 @@ class CharacterCard extends StatelessWidget{
         width: double.infinity,
         child: InkWell(
           
-          onTap: (){
+          onTap: () async {
             if (kDebugMode) {
-              var id = character.id;
-              print("on tap id: $id");
+              print('on tap id: ${character.id}');
             }
+            
+            Navigator.push(
+              context, 
+              MaterialPageRoute(builder: (context) => CharacterInfo(character: character) )
+            );
           },
         
           child: ListTile(
@@ -36,23 +41,23 @@ class CharacterCard extends StatelessWidget{
         
             title: Text(
               character.name,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 19,
               ),
             ),
         
             subtitle: Padding(
-              padding: EdgeInsets.symmetric(vertical: 2),
+              padding: const EdgeInsets.symmetric(vertical: 2),
               child: Text(
                 character.gender,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 15
                 )
               ),
             ),
         
             trailing: IconButton(
-              icon: character.isFavorite ? Icon(Icons.star) : Icon(Icons.star_border),
+              icon: character.isFavorite ? const Icon(Icons.star) : const Icon(Icons.star_border),
               onPressed: actionFavoriteButton
             ) 
           )

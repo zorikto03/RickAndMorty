@@ -17,7 +17,7 @@ class HomeTab extends StatelessWidget{
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("All characters"),
+        title: const Text('All characters'),
         centerTitle: true,
       ),
       body: NotificationListener<ScrollNotification>(

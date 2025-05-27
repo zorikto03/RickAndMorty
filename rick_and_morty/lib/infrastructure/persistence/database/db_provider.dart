@@ -10,21 +10,46 @@ class DbProvider{
   Future<Database> get database async => await initDb();
 
   Future<Database> initDb() async{
-    var documentDirectory = join(await getDatabasesPath(), "test_db.db");
+    var documentDirectory = join(await getDatabasesPath(), 'test_db.db');
 
-    //await deleteDatabase(documentDirectory);
+    await deleteDatabase(documentDirectory);
 
     return await openDatabase(
       documentDirectory,
-      onCreate: (db, version) {
-        return db.execute("CREATE TABLE Characters("
-        "id INTEGER PRIMARY KEY," 
-        "name TEXT,"
-        "status TEXT,"
-        "species TEXT,"
-        "gender TEXT,"
-        "image TEXT,"
-        "isFavorite bit)"
+      onCreate: (db, version) async {
+        await db.execute(
+          'CREATE TABLE Characters('
+          'id INTEGER PRIMARY KEY,' 
+          'name TEXT,'
+          'status TEXT,'
+          'species TEXT,'
+          'gender TEXT,'
+          'image TEXT,'
+          'locationName TEXT,'
+          'locationUrl TEXT,'
+          'originName TEXT,'
+          'originUrl TEXT,'
+          'isFavorite bit)'
+        );
+
+        await db.execute(
+          'CREATE TABLE Episodes('
+          'id INTEGER PRIMARY KEY,'
+          'name TEXT,'
+          'url TEXT,'
+          'air_date TEXT,'
+          'episode TEXT'
+          ')'
+        );
+
+        await db.execute(
+          'CREATE TABLE Locations('
+          'id INTEGER PRIMARY KEY,'
+          'name TEXT,'
+          'type TEXT,'
+          'dimension TEXT,'
+          'url TEXT'
+          ')'
         );
       },
       version: 1
